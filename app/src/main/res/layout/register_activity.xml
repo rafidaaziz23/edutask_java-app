@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="@color/backgroundColor">
+
+    <!-- App Logo -->
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/logo_unsia"
+        android:contentDescription="@string/app_name"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Email Input -->
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:background="@drawable/rounded_edittext"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Username Input -->
+    <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:background="@drawable/rounded_edittext"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:background="@drawable/rounded_edittext"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Register Button -->
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:background="@drawable/rounded_button"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Login Text -->
+    <TextView
+        android:id="@+id/textViewLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have an account? Login here"
+        android:textColor="@color/linkColor"
+        android:textSize="14sp"
+        android:layout_gravity="center" />
+</LinearLayout>

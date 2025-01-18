@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Warna latar belakang tombol -->
+    <solid android:color="@color/buttonColor" />
+
+    <!-- Radius untuk sudut tombol -->
+    <corners android:radius="16dp" />
+
+    <!-- Warna dan lebar border tombol -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/buttonBorderColor" />
+</shape>
