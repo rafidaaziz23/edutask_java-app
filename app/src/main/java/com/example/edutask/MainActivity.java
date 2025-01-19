@@ -1,6 +1,7 @@
 package com.example.edutask;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,17 +25,26 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Seed data untuk memastikan lecturer dan student tersedia
+        // Seed data untuk memastikan lecturer tersedia
         DatabaseHelper.seedLecturer(this);
 
+        // Setup Bottom Navigation
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        // Pastikan ID ini sama dengan ID FragmentContainerView di layout
+        NavController navController;
+        try {
+            navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        } catch (IllegalStateException e) {
+            Log.e("MainActivity", "NavController tidak ditemukan: " + e.getMessage());
+            throw e;
+        }
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
 

@@ -19,13 +19,13 @@ import com.example.edutask.data.database.AppDatabase;
 public class DatabaseHelper {
 
     private static volatile DatabaseHelper instance;
-    private static AppDatabase appDatabase;  // Ganti menjadi AppDatabase untuk akses database yang benar
+    private static AppDatabase appDatabase;
 
     public static DatabaseHelper getInstance(final Context context) {
         if (instance == null) {
             synchronized (DatabaseHelper.class) {
                 if (instance == null) {
-                    appDatabase = AppDatabase.getInstance(context);  // Gunakan AppDatabase.getInstance()
+                    appDatabase = AppDatabase.getInstance(context);
                     instance = new DatabaseHelper();
                 }
             }
@@ -33,9 +33,8 @@ public class DatabaseHelper {
         return instance;
     }
 
-    // Menambahkan method untuk akses UserDao
     public UserDao userDao() {
-        return appDatabase.userDao();  // Gunakan userDao dari AppDatabase
+        return appDatabase.userDao();
     }
 
     public static void seedLecturer(Context context) {
