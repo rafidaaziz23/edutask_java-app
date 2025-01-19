@@ -11,7 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.edutask.databinding.ActivityMainBinding;
-import com.example.edutask.data.DatabaseHelper;
+import com.example.edutask.data.helper.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,15 +24,32 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
-        dbHelper.seedLecturer();
+        // Seed data untuk memastikan lecturer dan student tersedia
+        DatabaseHelper.seedLecturer(this);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+
+    /**
+     * Metode untuk setup Bottom Navigation
+     */
+    private void setupBottomNavigation() {
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        // Konfigurasi AppBar dengan ID menu utama
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+
+        // Menghubungkan Bottom Navigation dengan NavController
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
