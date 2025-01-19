@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.question.QuestionFragment"
+    android:paddingTop="62dp">
+
+    <!-- Question Text -->
+    <TextView
+        android:id="@+id/tv_quiz_question"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="What is the capital of France?"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Option A -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_option_a"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_quiz_question">
+
+        <TextView
+            android:id="@+id/tv_option_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="A. Paris"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Option B -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_option_b"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_option_a">
+
+        <TextView
+            android:id="@+id/tv_option_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="B. Berlin"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Option C -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_option_c"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_option_b">
+
+        <TextView
+            android:id="@+id/tv_option_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="C. Madrid"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Option D -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_option_d"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_option_c">
+
+        <TextView
+            android:id="@+id/tv_option_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="D. Rome"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Prev Button -->
+    <Button
+        android:id="@+id/btn_prev"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Prev"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_next"
+        app:layout_constraintTop_toBottomOf="@id/card_option_d" />
+
+    <!-- Next Button -->
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        app:layout_constraintStart_toEndOf="@+id/btn_prev"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_option_d" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
