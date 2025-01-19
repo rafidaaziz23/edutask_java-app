@@ -39,16 +39,24 @@ public class DatabaseHelper {
     }
 
     public static void seedLecturer(Context context) {
-        // Akses userDao melalui instance AppDatabase
+        // Pastikan AppDatabase sudah benar-benar terinisialisasi
+        AppDatabase database = AppDatabase.getInstance(context);
+
         new Thread(() -> {
             try {
-                int lecturerCount = appDatabase.userDao().getUserCountByRole("lecture");
-                if (lecturerCount == 0) {
-                    Log.d("DatabaseHelper", "Seeding lecturer and student data.");
-                    appDatabase.userDao().insertUser(new User("lecturer", "lecturer@edutask.com", "lecturer123", "lecture"));
-                    appDatabase.userDao().insertUser(new User("student", "student@edutask.com", "student123", "student"));
+                // Pastikan database sudah siap
+                if (database != null) {
+                    int lecturerCount = database.userDao().getUserCountByRole("lecture");
+                    if (lecturerCount == 0) {
+                        Log.d("DatabaseHelper", "Seeding lecturer and student data.");
+                        // Lakukan insert user di sini
+                        database.userDao().insertUser(new User("lecturer", "lecturer@edutask.com", "lecturer123", "lecture"));
+                        database.userDao().insertUser(new User("student", "student@edutask.com", "student123", "student"));
+                    } else {
+                        Log.d("DatabaseHelper", "Users already exist, no seeding needed.");
+                    }
                 } else {
-                    Log.d("DatabaseHelper", "Users already exist, no seeding needed.");
+                    Log.e("DatabaseHelper", "Database instance is null");
                 }
             } catch (Exception e) {
                 Log.e("DatabaseHelper", "Error during seeding data", e);
