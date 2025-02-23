@@ -18,52 +18,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_quiz"
-        android:layout_width="0dp"
+    <!-- Button untuk Create Quiz -->
+    <Button
+        android:id="@+id/btn_create_quiz"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        android:layout_marginTop="16dp"
+        android:text="Create Quiz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_list_quizzes_title"
+        android:layout_marginStart="16dp" />
+
+    <!-- RecyclerView untuk daftar quiz -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_quiz"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_create_quiz"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_list_quizzes_title">
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Title Quiz -->
-            <TextView
-                android:id="@+id/tv_quiz_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title Quiz: Example Title"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Description Quiz -->
-            <TextView
-                android:id="@+id/tv_quiz_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Description: This is an example of a quiz description."
-                android:textSize="16sp" />
-
-            <!-- Deadline -->
-            <TextView
-                android:id="@+id/tv_quiz_deadline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Deadline: 2025-01-31"
-                android:textSize="16sp"
-                android:textColor="@android:color/holo_red_dark" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

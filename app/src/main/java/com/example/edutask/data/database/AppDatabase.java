@@ -22,7 +22,7 @@ import com.example.edutask.data.entity.Notification;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {User.class, Quiz.class, Question.class, StudentAnswer.class, Notification.class}, version = 2, exportSchema = false)
+@Database(entities = {User.class, Quiz.class, Question.class, StudentAnswer.class, Notification.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 
@@ -38,20 +38,31 @@ public abstract class AppDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "education.db")
-                    .addMigrations(MIGRATION_1_2)  // Menambahkan migrasi
+                    .fallbackToDestructiveMigration()  // Ensure you add MIGRATION_2_3
                     .build();
         }
         return instance;
     }
 
-    // Migrasi dari versi 1 ke versi 2 (contoh)
+    // Migration from version 1 to 2
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-            // Misalnya, menambahkan kolom baru 'new_column' pada tabel 'users'
             database.execSQL("ALTER TABLE users ADD COLUMN new_column INTEGER DEFAULT 0");
         }
     };
+
+    // Migration from version 2 to 3
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            // Add the new column to the quizzes table
+            database.execSQL("ALTER TABLE quizzes ADD COLUMN question TEXT");
+            // If you have more columns to add, add them here as well
+        }
+    };
 }
+
+
 
 

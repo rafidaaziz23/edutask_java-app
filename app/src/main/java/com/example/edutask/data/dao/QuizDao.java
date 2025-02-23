@@ -14,7 +14,7 @@ public interface QuizDao {
     @Insert
     void insertQuiz(Quiz quiz);
 
-    @Query("SELECT * FROM quizzes WHERE lecturer_id = :lecturerId")
+    @Query("SELECT * FROM quizzes WHERE lecturerId = :lecturerId") // Updated to match the new field name
     List<Quiz> getQuizzesByLecturer(int lecturerId);
 
     @Query("SELECT * FROM quizzes")

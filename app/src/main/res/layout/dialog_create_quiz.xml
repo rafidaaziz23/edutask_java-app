@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Judul Quiz -->
+    <EditText
+        android:id="@+id/et_quiz_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quiz Title" />
+
+    <!-- Deskripsi Quiz -->
+    <EditText
+        android:id="@+id/et_quiz_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quiz Description"
+        android:layout_marginTop="8dp" />
+
+    <!-- Deadline Quiz -->
+    <EditText
+        android:id="@+id/et_quiz_deadline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quiz Deadline"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Pertanyaan -->
+    <EditText
+        android:id="@+id/et_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Question"
+        android:layout_marginTop="8dp" />
+
+    <!-- Jawaban -->
+    <EditText
+        android:id="@+id/et_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Answer"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
