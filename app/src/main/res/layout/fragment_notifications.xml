@@ -1,83 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".ui.notifications.NotificationsFragment">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tv_notifications_title"
+    <!-- RecyclerView untuk menampilkan notifikasi -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_notifications"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notifications"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Static Notification 1 -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_notification_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="2dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp">
-
-            <TextView
-                android:id="@+id/tv_notification_time_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time: 2025-01-19T08:00:00"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_notification_status_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Status: Not Sent"
-                android:textSize="14sp"
-                android:layout_marginTop="4dp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- Static Notification 2 -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_notification_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="2dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp">
-
-            <TextView
-                android:id="@+id/tv_notification_time_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time: 2025-01-20T10:30:00"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_notification_status_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Status: Sent"
-                android:textSize="14sp"
-                android:layout_marginTop="4dp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_notification" />
 </LinearLayout>

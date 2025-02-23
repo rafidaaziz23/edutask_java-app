@@ -12,11 +12,11 @@ import java.util.List;
 public interface QuizDao {
 
     @Insert
-    void insertQuiz(Quiz quiz);
+    long insertQuiz(Quiz quiz);
 
     @Query("SELECT * FROM quizzes WHERE lecturerId = :lecturerId") // Updated to match the new field name
     List<Quiz> getQuizzesByLecturer(int lecturerId);
 
-    @Query("SELECT * FROM quizzes")
+    @Query("SELECT * FROM quizzes order by quizId desc")
     List<Quiz> getAllQuizzes();
 }

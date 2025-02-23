@@ -1,4 +1,4 @@
-package com.example.edutask.ui.dashboard.adapter;
+package com.example.edutask.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

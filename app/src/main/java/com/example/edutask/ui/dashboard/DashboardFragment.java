@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.edutask.R;
 import com.example.edutask.data.database.AppDatabase;
+import com.example.edutask.data.entity.Notification;
 import com.example.edutask.data.entity.Quiz;
-import com.example.edutask.ui.dashboard.adapter.QuizAdapter;
+import com.example.edutask.ui.adapter.QuizAdapter;
+import com.example.edutask.worker.NotificationWorker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +29,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executors;
+
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import java.util.concurrent.TimeUnit;
 
 public class DashboardFragment extends Fragment {
 
@@ -135,11 +141,50 @@ public class DashboardFragment extends Fragment {
 
         // Jalankan operasi database di background thread
         Executors.newSingleThreadExecutor().execute(() -> {
-            database.quizDao().insertQuiz(quiz); // Gunakan instance QuizDao untuk menyimpan data
+            // Simpan quiz ke database dan dapatkan quiz_id yang baru di-generate
+            long quizId = database.quizDao().insertQuiz(quiz);
+
+            // Buat notifikasi untuk quiz yang baru dibuat
+            Notification notification = new Notification();
+            notification.quiz_id = (int) quizId; // Gunakan quiz_id yang baru di-generate
+            notification.notification_time = deadline; // Gunakan deadline quiz sebagai waktu notifikasi
+            notification.notification_sent = false; // Notifikasi belum terkirim
+
+            // Simpan notifikasi ke database
+            database.notificationDao().insertNotification(notification);
+
+            // Jadwalkan Worker untuk mengirim notifikasi pada waktu yang sesuai
+            scheduleNotificationWorker(deadline);
+
+            // Perbarui UI di main thread
             requireActivity().runOnUiThread(() -> {
                 Toast.makeText(requireContext(), "Quiz saved successfully!", Toast.LENGTH_SHORT).show();
                 loadQuizzes(); // Reload quizzes setelah menyimpan quiz baru
             });
         });
+    }
+
+    // Method untuk menjadwalkan Worker
+    private void scheduleNotificationWorker(String deadline) {
+        // Parse deadline dari string ke Calendar
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        Calendar deadlineCalendar = Calendar.getInstance();
+        try {
+            deadlineCalendar.setTime(dateFormat.parse(deadline));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // Hitung delay dalam milidetik (waktu sekarang hingga deadline)
+        long delay = deadlineCalendar.getTimeInMillis() - System.currentTimeMillis();
+
+        // Buat OneTimeWorkRequest dengan delay
+        OneTimeWorkRequest notificationWork = new OneTimeWorkRequest.Builder(NotificationWorker.class)
+                .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+                .build();
+
+        // Jadwalkan Worker
+        WorkManager.getInstance(requireContext()).enqueue(notificationWork);
     }
 }

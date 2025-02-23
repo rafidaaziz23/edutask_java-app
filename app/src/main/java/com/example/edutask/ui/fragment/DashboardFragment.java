@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.edutask.R;
 import com.example.edutask.data.entity.Quiz;
-import com.example.edutask.ui.dashboard.adapter.QuizAdapter;
+import com.example.edutask.ui.adapter.QuizAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

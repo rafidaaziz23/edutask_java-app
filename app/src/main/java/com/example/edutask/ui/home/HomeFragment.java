@@ -4,15 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.edutask.R;
+import com.example.edutask.data.database.AppDatabase;
+import com.example.edutask.data.entity.Quiz;
 import com.example.edutask.databinding.FragmentHomeBinding;
+
+import java.util.List;
+import java.util.concurrent.Executors;
 
 public class HomeFragment extends Fragment {
 
@@ -20,9 +24,6 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -33,23 +34,39 @@ public class HomeFragment extends Fragment {
         // Menampilkan daftar quiz upcoming
         LinearLayout quizListLayout = binding.quizListLayout;
 
-        // Contoh data quiz
-        String[] quizTitles = {"Math Test", "Science Test","Programming Test", "Database Test"};
-        String[] quizDeadlines = {"2025-01-20", "2025-01-25","2025-01-20", "2025-01-25"};
-
-        // Menambahkan item quiz ke dalam LinearLayout
-        for (int i = 0; i < quizTitles.length; i++) {
-            View quizItemView = inflater.inflate(R.layout.quiz_item, quizListLayout, false);
-            TextView quizTitleTextView = quizItemView.findViewById(R.id.text_quiz_title);
-            TextView quizDeadlineTextView = quizItemView.findViewById(R.id.text_quiz_deadline);
-
-            quizTitleTextView.setText(quizTitles[i]);
-            quizDeadlineTextView.setText("Deadline: " + quizDeadlines[i]);
-
-            quizListLayout.addView(quizItemView);
-        }
+        // Ambil data quiz dari database
+        loadQuizzesFromDatabase(inflater, quizListLayout);
 
         return root;
+    }
+
+    private void loadQuizzesFromDatabase(LayoutInflater inflater, LinearLayout quizListLayout) {
+        // Dapatkan instance database
+        AppDatabase database = AppDatabase.getInstance(requireContext());
+
+        // Jalankan operasi database di background thread
+        Executors.newSingleThreadExecutor().execute(() -> {
+            // Ambil semua quiz dari database
+            List<Quiz> quizzes = database.quizDao().getAllQuizzes();
+
+            // Update UI di main thread
+            requireActivity().runOnUiThread(() -> {
+                // Bersihkan layout sebelum menambahkan data baru
+                quizListLayout.removeAllViews();
+
+                // Tambahkan item quiz ke dalam LinearLayout
+                for (Quiz quiz : quizzes) {
+                    View quizItemView = inflater.inflate(R.layout.quiz_item, quizListLayout, false);
+                    TextView quizTitleTextView = quizItemView.findViewById(R.id.text_quiz_title);
+                    TextView quizDeadlineTextView = quizItemView.findViewById(R.id.text_quiz_deadline);
+
+                    quizTitleTextView.setText(quiz.getTitle());
+                    quizDeadlineTextView.setText("Deadline: " + quiz.getDeadline());
+
+                    quizListLayout.addView(quizItemView);
+                }
+            });
+        });
     }
 
     @Override

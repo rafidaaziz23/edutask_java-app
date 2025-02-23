@@ -3,33 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="12dp">
 
-        <!-- Notification Time -->
+        <!-- Waktu Notifikasi -->
         <TextView
             android:id="@+id/tv_notification_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notification Time: 2025-01-19T08:00:00"
-            android:textSize="16sp" />
+            android:text="Time: 2025-01-19T08:00:00"
+            android:textSize="14sp" />
 
-        <!-- Notification Status -->
+        <!-- Status Notifikasi -->
         <TextView
             android:id="@+id/tv_notification_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="Status: Not Sent"
-            android:textSize="16sp"
-            android:textColor="@android:color/holo_red_dark" />
-
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
